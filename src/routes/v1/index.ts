@@ -1,6 +1,6 @@
 import express from "express";
 const router = express.Router();
-import { query } from "express-validator";
+import { param, query } from "express-validator";
 import { validateRequest } from "../../middlewares/requestValidation";
 import { v1Controllers } from "../../controllers/v1";
 
@@ -24,6 +24,17 @@ router.get(
   ],
   validateRequest,
   v1Controllers.exchangeRateController
+);
+
+router.get(
+  "/public-treasury/:coin_id",
+  [
+    param("coin_id")
+      .isIn(["bitcoin", "ethereum"])
+      .withMessage("Invalid coin_id"),
+  ],
+  validateRequest,
+  v1Controllers.publicTreasuryController
 );
 
 export { router as v1Router };
