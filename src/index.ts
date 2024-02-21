@@ -2,6 +2,7 @@ import { app } from "./config/app";
 import { config } from "dotenv";
 import { db } from "./config/mongoose";
 import { envConfig } from "./config/envConfig";
+import { cronJobs } from "./cronjobs";
 config();
 
 const start = async () => {
@@ -9,6 +10,7 @@ const start = async () => {
   envConfig();
   try {
     await db.connect(process.env.DB_URL!);
+    cronJobs();
     app.listen(port, () => {
       console.log(`Listening on port ${port}`);
     });
