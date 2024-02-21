@@ -4,7 +4,7 @@ import { query } from "express-validator";
 import { validateRequest } from "../../middlewares/requestValidation";
 import { v1Controllers } from "../../controllers/v1";
 
-router.post(
+router.get(
   "/exchange-rate",
   [
     query("fromCurrency").notEmpty().withMessage("fromCurrency is required"),
